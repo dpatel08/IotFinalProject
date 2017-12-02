@@ -276,31 +276,6 @@ function Car(r, g, b) {
     }
   }
 
-  this.carCollision = function(cars) {
-    collide = false;
-  if(cars.length > 1)
-  {
 
-    for(i = 0; i < cars.length; i++){
-      deltaX = this.x - cars[i].xpos;
-      deltaY = this.y - cars[i].ypos;
-      d = sqrt(deltaX * deltaX + deltaY * deltaY);
-      if(d < this.radius/2){
-        collidingCar = cars[i];
-        collide = true;
-      }
-    }
-
-    if(collide == true){
-      console.log("HIT");
-      // tempX = cos(cars[i].velAng * PI/180);
-      // tempY = sin(cars[i].velAng * PI/180);
-      //velAng = acos((this.x * tempX)) + (this.y * tempY))/(sqrt(this.x * this.x + this.y * this.y) * sqrt(tempX * tempX + tempY * tempY));
-      this.xvel *= -1;
-      this.yvel *= -1;
-
-    }
-  }
-}
 
 }
