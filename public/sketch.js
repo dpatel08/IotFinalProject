@@ -18,10 +18,6 @@ function setup() {
     id: socket.id,
     xpos: car.x,
     ypos: car.y,
-    xspeed: car.xspeed,
-    yspeed: car.yspeed,
-    xaccel: car.xaccel,
-    yaccel: car.yaccel,
     radius: car.radius
   }
   socket.emit('connection', data)
@@ -95,10 +91,6 @@ function draw() {
     id: socket.id,
     xpos: car.x,
     ypos: car.y,
-    xspeed: car.xspeed,
-    yspeed: car.yspeed,
-    xaccel: car.xaccel,
-    yaccel: car.yaccel,
     radius: car.radius
   }
 
