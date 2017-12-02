@@ -1,8 +1,9 @@
 var cars = [];
-function Car(id, xpos, ypos, radius){
+function Car(id, xpos, ypos, velAng, radius){
   this.id = id;
   this.xpos = xpos;
   this.ypos = ypos;
+  this.velAng = velAng;
   this.radius = radius;
 }
 var express = require('express');
@@ -23,7 +24,7 @@ function carbeat(){
   io.sockets.emit('carbeat', cars);
 }
 function newConnection(socket){
-  var car = new Car(socket.id, socket.xpos, socket.ypos, socket.radius);
+  var car = new Car(socket.id, socket.xpos, socket.ypos, socket.velAng, socket.radius);
   cars.push(car);
   //console.log('New connection: ' + socket.id);
 
@@ -39,6 +40,7 @@ function carMsg(data) {
 
   car.xpos = data.xpos;
   car.ypos = data.ypos;
+  car.velAng = data.velAng;
   car.radius = data.radius;
 
   socket.broadcast.emit('carbeat', data);

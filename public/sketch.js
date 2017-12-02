@@ -18,6 +18,7 @@ function setup() {
     id: socket.id,
     xpos: car.x,
     ypos: car.y,
+    velAng: car.velAng,
     radius: car.radius
   }
   socket.emit('connection', data)
@@ -81,18 +82,28 @@ function draw() {
   for (var i = cars.length - 1; i >= 0; i--){
     var id = cars[i].id;
     if(id !== socket.id) {
+      deltaX = car.x - cars[i].xpos;
+      deltaY = car.y - cars[i].ypos;
+      d = sqrt(deltaX * deltaX + deltaY * deltaY);
+      if(d < car.radius + cars[i].radius){
+        // collidingCar = cars[i];
+        car.xspeed *= -1;
+        car.yspeed *= -1;
+      }
+
       fill(0,0,255);
       ellipse(cars[i].xpos, cars[i].ypos, cars[i].radius, cars[i].radius);
     }
-     console.log("ID:\t" + socket.id + "\tCar:\t" + cars[i].id );
+     // console.log("ID:\t" + socket.id + "\tCar:\t" + cars[i].id );
   }
 
   var data = {
     id: socket.id,
     xpos: car.x,
     ypos: car.y,
+    velAng: car.velAng,
     radius: car.radius
   }
-
+  // car.carCollision(cars);
   socket.emit('update', data);
 }

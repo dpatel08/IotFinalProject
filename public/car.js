@@ -17,7 +17,7 @@ function Car(r, g, b) {
   this.yspeed = 0;
   this.xaccel = 1; //accel is a multiplier in this model
   this.yaccel = 1;
-
+  this.velAng = 0;  //velocity angle
   this.deccelRate = .99;
   this.friction = .985;
 
@@ -65,6 +65,17 @@ function Car(r, g, b) {
 
     this.x += this.xspeed;
     this.y += this.yspeed;
+
+    this.velAng = atan2(this.yspeed, this.xspeed);
+    if(this.velAng != PI){
+      this.velAng *= -1;
+    }
+    if(this.velAng < 0){
+      this.velAng += 2*PI;
+    }
+    if(this.velAng == -0)
+      this.velAng = 0;
+    this.velAng *= 180/PI;
 
     this.x = constrain(this.x, 0, width);
     this.y = constrain(this.y, 0, height);
@@ -264,5 +275,32 @@ function Car(r, g, b) {
         }
     }
   }
+
+  this.carCollision = function(cars) {
+    collide = false;
+  if(cars.length > 1)
+  {
+
+    for(i = 0; i < cars.length; i++){
+      deltaX = this.x - cars[i].xpos;
+      deltaY = this.y - cars[i].ypos;
+      d = sqrt(deltaX * deltaX + deltaY * deltaY);
+      if(d < this.radius/2){
+        collidingCar = cars[i];
+        collide = true;
+      }
+    }
+
+    if(collide == true){
+      console.log("HIT");
+      // tempX = cos(cars[i].velAng * PI/180);
+      // tempY = sin(cars[i].velAng * PI/180);
+      //velAng = acos((this.x * tempX)) + (this.y * tempY))/(sqrt(this.x * this.x + this.y * this.y) * sqrt(tempX * tempX + tempY * tempY));
+      this.xvel *= -1;
+      this.yvel *= -1;
+
+    }
+  }
+}
 
 }
