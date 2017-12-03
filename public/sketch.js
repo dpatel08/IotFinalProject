@@ -4,13 +4,20 @@ var cars =[];
 
 function setup() {
   createCanvas(800, 800); //bg
-  car = new Car(255, 255, 255); //car
+  tempX = 0;
+  tempY = 0;
+
   track = new Track(); //track
+  while(!track.isOnTrack(tempX, tempY, 20)){
+    tempX = random(width);
+    tempY = random(height);
+  }
+  car = new Car(tempX, tempY, 255, 255, 255); //car
   brake = loadImage("img/brakev2.png");
   gas = loadImage("img/gasv2.png");
   fr = 24; //frameRate
   currentTheta = 0;
-  safeMode = true;
+  safeMode = false;
   frameRate(fr);
   checkbox = createCheckbox('Safe Mode', false);
   checkbox.position(10, 10);
