@@ -4,21 +4,17 @@ var cars =[];
 
 function setup() {
   createCanvas(800, 800); //bg
-  tempCarX = 0;
-  tempCarY = 0;
+  car = new Car(255, 255, 255); //car
   track = new Track(); //track
-  while(!track.isOnTrack(tempCarX, tempCarY, 20)){
-    tempCarX = random(width);
-    tempCarY = random(height);
-  }
-  car = new Car(tempCarX, tempCarY, 255, 255, 255); //car
   brake = loadImage("img/brakev2.png");
   gas = loadImage("img/gasv2.png");
   fr = 24; //frameRate
   currentTheta = 0;
   safeMode = true;
   frameRate(fr);
-
+  checkbox = createCheckbox('Safe Mode', false);
+  checkbox.position(10, 10);
+  checkbox.changed(myCheckedEvent);
   socket = io.connect();
   var data = {
     id: socket.id,
@@ -33,6 +29,14 @@ function setup() {
   function(data) {
     cars = data;
   });
+}
+
+function myCheckedEvent() {
+  if (this.checked()) {
+      safeMode = true;
+  } else {
+      safeMode = false;
+  }
 }
 
 function newDrawing(data){
