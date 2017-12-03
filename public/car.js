@@ -1,7 +1,7 @@
 //utilizing sloppy inverse kinematics
-function Car(r, g, b) {
-  this.x = width / 2; //arbitrary for now
-  this.y = 120;
+function Car(x, y, r, g, b) {
+  this.x = x; //arbitrary for now
+  this.y = y;
   this.radius = 20;
 
   //range is 235 -- 310

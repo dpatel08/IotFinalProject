@@ -4,8 +4,14 @@ var cars =[];
 
 function setup() {
   createCanvas(800, 800); //bg
-  car = new Car(255, 255, 255); //car
+  tempCarX = 0;
+  tempCarY = 0;
   track = new Track(); //track
+  while(!track.isOnTrack(tempCarX, tempCarY, 20)){
+    tempCarX = random(width);
+    tempCarY = random(height);
+  }
+  car = new Car(tempCarX, tempCarY, 255, 255, 255); //car
   brake = loadImage("img/brakev2.png");
   gas = loadImage("img/gasv2.png");
   fr = 24; //frameRate
