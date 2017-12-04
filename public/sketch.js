@@ -120,6 +120,12 @@ function draw() {
     for (var i = cars.length - 1; i >= 0; i--){
       var id = cars[i].id;
       if(id !== socket.id) {
+        xRatio = car.trackWidth / cars[i].trackWidth;
+        yRatio = car.trackHeight / cars[i].trackHeight;
+        rRatio = car.radius / cars[i].radius;
+        cars[i].xpos *= xRatio;
+        cars[i].ypos *= yRatio;
+        cars[i].radius *= rRatio;
         deltaX = car.x - cars[i].xpos;
         deltaY = car.y - cars[i].ypos;
         d = sqrt(deltaX * deltaX + deltaY * deltaY);
