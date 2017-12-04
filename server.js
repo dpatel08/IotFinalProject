@@ -1,11 +1,13 @@
 var cars = [];
-function Car(id, xpos, ypos, xspeed, yspeed, radius){
+function Car(id, xpos, ypos, xspeed, yspeed, radius, trackWidth, trackHeight){
   this.id = id;
   this.xpos = xpos;
   this.ypos = ypos;
   this.xspeed = xspeed;
   this.yspeed = yspeed;
   this.radius = radius;
+  this.trackWidth = trackWidth;
+  this.trackHeight = trackHeight;
 }
 var express = require('express');
 var app = express();
@@ -25,7 +27,7 @@ function carbeat(){
   io.sockets.emit('carbeat', cars);
 }
 function newConnection(socket){
-  var car = new Car(socket.id, socket.xpos, socket.ypos, socket.xspeed, socket.yspeed, socket.radius);
+  var car = new Car(socket.id, socket.xpos, socket.ypos, socket.xspeed, socket.yspeed, socket.radius, socket.trackWidth, socket.trackHeight);
   cars.push(car);
   //console.log('New connection: ' + socket.id);
 
@@ -44,6 +46,8 @@ function carMsg(data) {
   car.xspeed = data.xspeed;
   car.yspeed = data.yspeed;
   car.radius = data.radius;
+  car.trackWidth = data.trackWidth;
+  car.trackHeight = data.trackHeight;
 
   socket.broadcast.emit('carbeat', data);
   //io.sockets.emit('carbeat', data);

@@ -1,8 +1,12 @@
 //utilizing sloppy inverse kinematics
-function Car(x, y, r, g, b) {
+function Car(x, y, r, g, b, trackWidth, trackHeight) {
   this.x = x; //arbitrary for now
   this.y = y;
-  this.radius = 20;
+  // this.radius = 20;
+  this.trackWidth = trackWidth;
+  this.trackHeight = trackHeight;
+  this.radius = (track.outerWidth-track.innerWidth)/(4*3);
+
 
   //range is 235 -- 310
   this.range = 235;
@@ -141,9 +145,9 @@ function Car(x, y, r, g, b) {
     DEGREES_IN_CIRCLE = 360;
     NUM_REGIONS = 8;
     DEGREES_PER_REGION = DEGREES_IN_CIRCLE / NUM_REGIONS;
-    bounceAmount = 3;
-    velMultiplier = 0;
-    accMultiplier = 0;
+    bounceAmount = 3;   //3
+    velMultiplier = 2;  //0
+    accMultiplier = .5; //0
 
     if (angleWall <= DEGREES_PER_REGION) {
         if (this.isInRegion2(this.x, this.y)) {
